@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+  <div class="product-detail">
+    <div id="sidebar" class="col-sm-3">
+    <h3>Вироби</h3>
+    <ul>
+      <li {% if not category %} class="selected" {% endif %}>
+        <a href="{% url "shop:ProductList" %}">Все</a>
+      </li>
+      {% for cat in categories %}
+        <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+          <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+    <div class="col-sm-4">
+      <img src="{% if product.top_image %}{{ product.top_image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive">
+    </div>
+    <div class="col-sm-3">
+      <h1>{{ product.name }}</h1>
+      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+      <p class="price">
+        {{ product.price }} грн.
+      </p>
+      <span>
+        {{ product.description | linebreaks}}
+      </span>
+    </div>
+  </div>
+{% endblock %}
