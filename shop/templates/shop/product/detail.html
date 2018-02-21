@@ -3,11 +3,10 @@
 {% block title %}
   {{ product.name }}
 {% endblock %}
-{% block content %}
-  <div class="product-detail">
-    <div id="sidebar" class="col-sm-3">
+{% block aside %}
+  <div id="sidebar" class="col-sm-3">
     <h3>Вироби</h3>
-    <ul>
+    <ul class="list-group submenu">
       <li {% if not category %} class="selected" {% endif %}>
         <a href="{% url "shop:ProductList" %}">Все</a>
       </li>
@@ -18,6 +17,9 @@
       {% endfor %}
     </ul>
   </div>
+{% endblock %}
+{% block content %}
+  <div class="product-detail">    
     <div class="col-sm-4">
       <img src="{% if product.top_image %}{{ product.top_image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive">
     </div>
