@@ -31,18 +31,35 @@ body {
 }
 
 body {
-	…
-	
+  	…
+
 	.wrapper {
 		…
-		
-		header {
-			…
-			
-			.slogan {				
-				font-size: 20px @brand-font;
-		    }
-		}
-		
+
+		.submenu {
+            		margin-bottom: 30px;
+
+            		li {
+                		display: list-item;
+                		font: 300 14px @brand-font;
+		             list-style-position: inside;
+                		list-style-type: square;
+                		padding: 10px;
+                		text-transform: uppercase;
+
+                		&.active {
+                    		color: @brand-primary;
+                		}
+
+                		a {
+                    		color: @text-color;
+                    		text-decoration: none;
+
+                    		&:hover {
+                        			color: @text-color;
+                    		}
+                		}
+            		}
+	       }
 	}
 }

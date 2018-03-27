@@ -4,29 +4,27 @@
   {{ product.name }}
 {% endblock %}
 {% block aside %}
-  <div id="sidebar" class="col-sm-3">
-    <h3>Вироби</h3>
+  <h3>Вироби</h3>
     <ul class="list-group submenu">
-      <li {% if not category %} class="selected" {% endif %}>
+      <li {% if not category %} class="list-group-item" {% endif %}>
         <a href="{% url "shop:ProductList" %}">Все</a>
       </li>
       {% for cat in categories %}
-        <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+        <li {% if category.slug == cat.slug %} class="list-group-item" {% endif %}>
           <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
         </li>
       {% endfor %}
-    </ul>
-  </div>
+    </ul> 
 {% endblock %}
 {% block content %}
-  <div class="product-detail">    
-    <div class="col-sm-4">
-      <img src="{% if product.top_image %}{{ product.top_image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive">
+  <div class="">    
+    <div class="rounded img-fluid thumbnail">
+      <img src="{% if product.top_image %}{{ product.top_image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" alt="{{product.category}} {{ product.name }}" style="max-height: 80%" class="rounded mx-auto d-block">
     </div>
-    <div class="col-sm-3">
+    <div class="">
       <h1>{{ product.name }}</h1>
       <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-      <p class="price">
+      <p class="">
         {{ product.price }} грн.
       </p>
       <span>

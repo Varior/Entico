@@ -25,7 +25,7 @@ class ProductListByCategory(ListView):
     def get_context_data(self, *args, **kwargs): 
         context = super(ProductListByCategory, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
-        context['category'] = Category.objects.filter(slug = self.kwargs.get('category_slug'))
+        context['category'] = Category.objects.get(slug = self.kwargs.get('category_slug'))
         return context
 
 class ProductDetail(DetailView):

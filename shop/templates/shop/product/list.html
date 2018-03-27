@@ -1,17 +1,16 @@
 {% extends 'shop/base.html' %}
 {% load static %}
-
 {% block title %}
   {% if category %} {{ category.name }} {% else %} Страница товаров {% endif %}
 {% endblock %}
 {% block aside %}
   <h3>Вироби</h3>
     <ul class="list-group submenu">
-      <li {% if not category %} class="selected" {% endif %}>
+      <li class="list-group-item" {% if not category %} class="list-group-item active" {% endif %}>
         <a href="{% url "shop:ProductList" %}">Все</a>
       </li>
       {% for cat in categories %}
-        <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+        <li class="list-group-item" {% if category.slug in cat.slug %} class="list-group-item active" {% endif %}>
           <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
         </li>
       {% endfor %}
@@ -19,12 +18,14 @@
 {% endblock %}
 {% block content %}   
     <h1>{% if category %}{{ category.name }}{% else %}Вироби{% endif %}</h1>
-    <div class="items row">
+    <div class="">
       {% for product in products %}
-        <div class="item col-sm-4">
+        <div class="col-md-7">
+          <div class="rounded img-fluid thumbnail">
           <a href="{{ product.get_absolute_url }}">
-            <img src="{% if product.top_image %}{{ product.top_image.url }}{% else %}{% static "img/No_Image.png" %}{% endif %}" class="img-responsive">
+            <img src="{% if product.top_image %}{{ product.get_image_200x200.url }}{% else %}{% static "img/No_Image.png" %}{% endif %}" alt="{{product.category}} {{ product.name }}">
           </a>
+          </div>
           <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
           {{ product.price }} грн.
         </div>

@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from django.core.urlresolvers import reverse
+from sorl.thumbnail import get_thumbnail
 
 
 # Модель категорії
@@ -44,6 +45,9 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:ProductDetail', args=[self.category.slug, self.slug])
+
+    def get_image_200x200(self):
+        return get_thumbnail(self.top_image, '200x200', crop='center')
 
 
 # Модель фотографій
